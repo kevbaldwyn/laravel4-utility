@@ -1,4 +1,10 @@
 {
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/kevbaldwyn/PHP-Error"
+        }
+    ],
     "name": "kevbaldwyn/laravel-utility",
     "description": "",
     "authors": [
@@ -9,6 +15,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
+        "kevbaldwyn/php-error",
         "illuminate/support": "4.0.x"
     },
     "autoload": {
