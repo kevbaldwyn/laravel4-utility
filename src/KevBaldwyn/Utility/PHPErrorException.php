@@ -4,7 +4,7 @@ namespace KevBaldwyn\Utility;
 use Log;
 use Config;
 use Symfony\Component\HttpKernel\Exception\FlattenException;
-use Debug;
+use KevBaldwyn\Utility\Debug;
 use \php_error\ErrorHandler;
 
 class PHPErrorException {

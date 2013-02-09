@@ -1,4 +1,5 @@
-<?php namespace KevBaldwyn\Utility\Providers;
+<?php 
+namespace KevBaldwyn\Utility\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use KevBaldwyn\Utility\Debug;
@@ -31,14 +32,6 @@ class UtilityServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		// register the classes
-		$this->app['debug'] = $this->app->share(function() {
-			return new Debug;
-		});
-		$this->app['php_errorexception'] = $this->app->share(function() {
-			return new PHPErrorException;
-		});
-		
 		// incldue the start file
 		include(__DIR__.'/../start.php');
 		
