@@ -32,6 +32,11 @@ class UtilityServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+		// create the shared binding
+		$this->app['debug'] = $this->app->share(function($app) {
+			return new Debug();
+		});
+		
 		// incldue the start file
 		include(__DIR__.'/../start.php');
 		
