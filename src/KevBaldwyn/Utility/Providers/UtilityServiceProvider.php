@@ -23,6 +23,12 @@ class UtilityServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		$this->package('kevbaldwyn/utility');
+		
+		// on app finish output the debug log
+        $this->app->finish(function() use ($app) {
+            Debug::outputLog();
+        });
+		
 	}
 
 	/**
