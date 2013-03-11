@@ -2,7 +2,7 @@
 namespace KevBaldwyn\Utility\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use KevBaldwyn\Utility\Debug;
+use KevBaldwyn\Utility\Debugger;
 use KevBaldwyn\Utility\PHPErrorException;
 //use Symfony\Component\HttpKernel\Exception\ErrorException;
 
@@ -27,7 +27,7 @@ class UtilityServiceProvider extends ServiceProvider {
 		// on app finish output the debug log
 		$app = $this->app;
         $this->app->finish(function() use ($app) {
-            Debug::outputLog();
+            $app['debugger']->outputLog();
         });
 		
 	}
@@ -40,8 +40,8 @@ class UtilityServiceProvider extends ServiceProvider {
 	public function register()
 	{
 		// create the shared binding
-		$this->app['debug'] = $this->app->share(function($app) {
-			return new Debug();
+		$this->app['debugger'] = $this->app->share(function($app) {
+			return new Debugger($app['view']);
 		});
 		
 		// incldue the start file
@@ -56,7 +56,7 @@ class UtilityServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('utility');
+		return array('utility', 'debugger');
 	}
 
 }

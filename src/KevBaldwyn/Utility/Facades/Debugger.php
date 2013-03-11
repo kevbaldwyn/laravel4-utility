@@ -2,13 +2,13 @@
 
 use Illuminate\Support\Facades\Facade;
 
-class Debug extends Facade {
+class Debugger extends Facade {
 
 	/**
 	 * Get the registered name of the component.
 	 *
 	 * @return string
 	 */
-	protected static function getFacadeAccessor() { return 'debug'; }
+	protected static function getFacadeAccessor() { return 'debugger'; }
 
 }
