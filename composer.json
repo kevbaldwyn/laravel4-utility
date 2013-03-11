@@ -1,8 +1,8 @@
 {
     "repositories": [
         {
-            "type": "vcs",
-            "url": "https://github.com/kevbaldwyn/PHP-Error"
+        	"type":"composer",
+	        "url" : "http://packages.purepixel.co.uk"
         }
     ],
     "name": "kevbaldwyn/laravel4-utility",
