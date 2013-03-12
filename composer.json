@@ -19,6 +19,9 @@
         "illuminate/support": "4.0.x"
     },
     "autoload": {
+        "classmap": [
+            "src/KevBaldwyn/Utility"
+        ],
         "psr-0": {
             "KevBaldwyn\\Utility": "src/"
         }

@@ -2,7 +2,7 @@
 namespace KevBaldwyn\Utility;
 
 use Config;
-use Illuminate\View\Environment;
+use View;
 
 class Debugger {
 	
@@ -13,7 +13,7 @@ class Debugger {
      * 
      * @var Illuminate\View\Environment
      */
-    protected $logView;
+    //protected $logView;
     
     /**
      * Create a new debug instance.
@@ -21,9 +21,11 @@ class Debugger {
      * @param  Illuminate\View\Environment  $logView
      * @return void
      */
+     /*
     public function __construct(Environment $logView) {
         $this->logView = $logView;
     }
+    */
     
     public function pa($var, $die = false) {
 		if(Config::get('app.debug')) {
@@ -46,10 +48,21 @@ class Debugger {
 	
 	public function outputLog() {
 		if(Config::get('app.debug')) {
+			ob_start();
 			foreach($this->log as $var) {
 				$this->pa($var);
 			}
+			$output = ob_get_contents();
+			ob_end_clean();
+			
+			$str = '<div id="debugger">';
+			$str .= $output;
+			$str .= '</div>';
+			return $str;
+			//return View::make('utility::debugger.log', compact('output'));
+			
 		}
+		
 	}
 	
 	public function getLog() {

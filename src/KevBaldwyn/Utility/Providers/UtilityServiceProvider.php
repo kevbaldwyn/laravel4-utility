@@ -27,7 +27,7 @@ class UtilityServiceProvider extends ServiceProvider {
 		// on app finish output the debug log
 		$app = $this->app;
         $this->app->finish(function() use ($app) {
-            $app['debugger']->outputLog();
+            echo $app['debugger']->outputLog();
         });
 		
 	}
@@ -41,7 +41,7 @@ class UtilityServiceProvider extends ServiceProvider {
 	{
 		// create the shared binding
 		$this->app['debugger'] = $this->app->share(function($app) {
-			return new Debugger($app['view']);
+			return new Debugger;
 		});
 		
 		// incldue the start file
