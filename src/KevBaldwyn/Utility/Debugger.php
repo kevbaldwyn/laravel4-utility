@@ -61,7 +61,7 @@ class Debugger {
 			$str .= '</div>';
 			return $str;
 			*/
-			return View::make('laravel4-utility::debugger.log', compact('output'));
+			return View::make('utility::debugger.log', compact('output'));
 			
 		}
 		
