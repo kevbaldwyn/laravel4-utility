@@ -55,11 +55,7 @@ class Debugger {
 			$output = ob_get_contents();
 			ob_end_clean();
 			
-			$str = '<div id="debugger">';
-			$str .= $output;
-			$str .= '</div>';
-			return $str;
-			//return View::make('utility::debugger.log', compact('output'));
+			return View::make('laravel4-utility::debugger.log', compact('output'));
 			
 		}
 		

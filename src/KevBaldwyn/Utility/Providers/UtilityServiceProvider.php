@@ -22,7 +22,7 @@ class UtilityServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		$this->package('kevbaldwyn/utility');
+		$this->package('kevbaldwyn/laravel4-utility');
 		
 		// on app finish output the debug log
 		$app = $this->app;
@@ -56,7 +56,7 @@ class UtilityServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('utility', 'debugger');
+		return array('laravel4-utility', 'debugger');
 	}
 
 }
