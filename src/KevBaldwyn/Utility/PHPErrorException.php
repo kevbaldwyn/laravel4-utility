@@ -1,10 +1,11 @@
 <?php
 namespace KevBaldwyn\Utility;
 
+use App;
 use Log;
 use Config;
 use Symfony\Component\HttpKernel\Exception\FlattenException;
-use KevBaldwyn\Utility\Debugger;
+//use KevBaldwyn\Utility\Debugger;
 use \php_error\ErrorHandler;
 
 class PHPErrorException {
@@ -21,7 +22,7 @@ class PHPErrorException {
 						
 			$handler = new ErrorHandler(array('application_root' => str_replace('/public', '', $_SERVER['DOCUMENT_ROOT'])));
 			$handler->turnOn();
-			$handler->addOutputArray('Debugger:log', Debugger::getLog());
+			$handler->addOutputArray('Debugger:log', App::make('debugger')->getLog());
 			$handler->reportError($flatten->getCode(), $flatten->getMessage(), $flatten->getLine(), $flatten->getFile(), $exception);
 
 		}
