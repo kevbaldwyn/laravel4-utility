@@ -1,6 +1,8 @@
-<?php echo $css; ?>
-<div id="debugger" class="background">
-<?php 
-echo $logHtml; 
-?>
+<div class="debugger__output">
+	<?php echo $css; ?>
+	<div class="background inline">
+	<?php 
+	echo $logHtml; 
+	?>
+	</div>
 </div>
