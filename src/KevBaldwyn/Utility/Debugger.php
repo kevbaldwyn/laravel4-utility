@@ -3,6 +3,7 @@ namespace KevBaldwyn\Utility;
 
 use Config;
 use View;
+use Session;
 use \php_error\ErrorHandler;
 
 class Debugger {
@@ -50,31 +51,14 @@ class Debugger {
 	public function outputLog() {
 		if(Config::get('app.debug')) {
 			
-			
+			// get output css
 			ob_start();
 			ErrorHandler::css();
 			$css = ob_get_contents();
 			ob_end_clean();
 			
-			
-			/*
-			$request  = ErrorHandler::getRequestHeaders();
-            $response = ErrorHandler::getResponseHeaders();
-            
-            $dumpData = array(
-                                'post'    => ( isset($_POST)    ? $_POST    : array() ),
-                                'get'     => ( isset($_GET)     ? $_GET     : array() ),
-                                'session' => ( isset($_SESSION) ? $_SESSION : array() ),
-                                'cookies' => ( isset($_COOKIE)  ? $_COOKIE  : array() )
-                        );
-            
-            if(count($this->log) > 0) {
-            	$dumpData['Debugger:log'] = $this->log;
-            }
-			*/
-			
-			$logHtml =  ErrorHandler::getRequestFullRequest(array('Debugger:log' => $this->log));
-
+			$logHtml =  ErrorHandler::getRequestFullRequest(array('session' => Session::getSession(),
+																  'Debugger:log' => $this->log));
 			
 			return View::make('laravel4-utility::debugger.log', compact('logHtml', 'css'));
 			
