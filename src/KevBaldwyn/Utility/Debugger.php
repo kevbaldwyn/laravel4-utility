@@ -29,8 +29,10 @@ class Debugger {
     }
     */
     
-    public function pa($var, $die = false) {
+    public function pa($var, $die = false, $return = false) {
 		if(Config::get('app.debug')) {
+			ob_start();
+			
 			echo '<pre>';
 			if(is_array($var)) {
 				print_r($var);
@@ -38,14 +40,23 @@ class Debugger {
 				var_dump($var);
 			}
 			echo '</pre>';
+			
+			$out = ob_get_contents();
+			ob_end_clean();
+			
 			if($die) {
-				die();
+				die($out);
+			}elseif($return) {
+				return $out;
+			}else{
+				echo $out;
 			}
+			
 		}
 	}
 	
 	public function log($var) {
-		$this->log[] = $var;
+		$this->log[] = self::pa($var, false, true);
 	}
 	
 	public function outputLog() {
