@@ -26,8 +26,11 @@ class UtilityServiceProvider extends ServiceProvider {
 		
 		// on app finish output the debug log
 		$app = $this->app;
-        $this->app->finish(function() use ($app) {
-            echo $app['debugger']->outputLog();
+        $this->app->finish(function($request, $response) use ($app) {
+        	// don't add the debug log if this is a json response
+        	if(!str_contains($response->headers->__toString(), '/json')) {
+            	echo $app['debugger']->outputLog();
+            }
         });
 		
 	}
