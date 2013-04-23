@@ -3,7 +3,6 @@ namespace KevBaldwyn\Utility;
 
 use Config;
 use View;
-use Session;
 use \php_error\ErrorHandler;
 
 class Debugger {
@@ -68,7 +67,7 @@ class Debugger {
 			$css = ob_get_contents();
 			ob_end_clean();
 			
-			$logHtml =  ErrorHandler::getRequestFullRequest(array('session' => Session::getSession(),
+			$logHtml =  ErrorHandler::getRequestFullRequest(array('session' => $_SESSION,
 																  'Debugger:log' => $this->log));
 			
 			return View::make('laravel4-utility::debugger.log', compact('logHtml', 'css'));
