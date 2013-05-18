@@ -4,6 +4,7 @@ namespace KevBaldwyn\Utility\Providers;
 use Illuminate\Support\ServiceProvider;
 use KevBaldwyn\Utility\Debugger;
 use KevBaldwyn\Utility\PHPErrorException;
+use KevBaldwyn\Utility\PackageMigrationCommand;
 //use Symfony\Component\HttpKernel\Exception\ErrorException;
 
 class UtilityServiceProvider extends ServiceProvider {
@@ -47,6 +48,13 @@ class UtilityServiceProvider extends ServiceProvider {
 			return new Debugger;
 		});
 		
+		
+		$this->app['command.kevbaldwyn.migrate-packages'] = $this->app->share(function($app) {
+			return new PackageMigrationCommand($app);
+		});
+				
+		$this->commands('command.kevbaldwyn.migrate-packages');
+				
 		// incldue the start file
 		include(__DIR__.'/../start.php');
 		
