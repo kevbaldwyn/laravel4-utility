@@ -8,7 +8,7 @@ use Config;
 
 class PHPErrorException {
 	
-	public static function report($exception, $handler) {
+	public static function report($exception) {
 		
 		if($exception instanceof \Symfony\Component\Debug\Exception\FatalErrorException) {
 			Log::emergency($exception);
