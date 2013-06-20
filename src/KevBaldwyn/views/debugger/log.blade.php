@@ -1,8 +1,7 @@
 <div class="debugger__output">
-	<?php echo $css; ?>
 	<div class="background inline">
 	<?php 
-	echo $logHtml; 
+	echo 'Info about page load and environment here.'
 	?>
 	</div>
 </div>

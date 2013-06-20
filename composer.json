@@ -1,10 +1,4 @@
 {
-    "repositories": [
-        {
-        	"type":"composer",
-	        "url" : "http://packages.purepixel.co.uk"
-        }
-    ],
     "name": "kevbaldwyn/laravel4-utility",
     "description": "",
     "authors": [
@@ -15,7 +9,6 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "kevbaldwyn/php-error" : "dev-master",
         "illuminate/support": "4.0.x"
     },
     "autoload": {

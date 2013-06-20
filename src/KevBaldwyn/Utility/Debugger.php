@@ -4,35 +4,19 @@ namespace KevBaldwyn\Utility;
 use Config;
 use View;
 use \php_error\ErrorHandler;
+use Psr\Log\LogLevel;
 
 class Debugger {
-	
-	private $log = array();
-	
-	/**
-     * Illuminate view environment.
-     * 
-     * @var Illuminate\View\Environment
-     */
-    //protected $logView;
+
     
-    /**
-     * Create a new debug instance.
-     * 
-     * @param  Illuminate\View\Environment  $logView
-     * @return void
-     */
-     /*
-    public function __construct(Environment $logView) {
-        $this->logView = $logView;
-    }
-    */
-    
-    public function pa($var, $die = false, $return = false) {
+    public function pa($var, $die = false, $return = false, $message = null) {
 		if(Config::get('app.debug')) {
 			ob_start();
 			
 			echo '<pre>';
+			if(!is_null($message)) {
+				echo $message . ":\n";
+			}
 			if(is_array($var)) {
 				print_r($var);
 			}else{
@@ -53,31 +37,27 @@ class Debugger {
 			
 		}
 	}
-	
-	public function log($var) {
-		$this->log[] = self::pa($var, false, true);
-	}
-	
-	public function outputLog() {
-		if(Config::get('app.debug')) {
-			
-			// get output css
-			ob_start();
-			ErrorHandler::css();
-			$css = ob_get_contents();
-			ob_end_clean();
-			
-			$logHtml =  ErrorHandler::getRequestFullRequest(array('session' => $_SESSION,
-																  'Debugger:log' => $this->log));
-			
-			return View::make('laravel4-utility::debugger.log', compact('logHtml', 'css'));
-			
+
+
+	public function dump($level, $message, $context) {
+		
+		if($level == LogLevel::DEBUG) {
+			$die    = (array_key_exists('die', $context)) ? $context['die'] : false;
+			$return = (array_key_exists('return', $context)) ? $context['return'] : false;
+			static::pa($context['data'], $die, $return, $message);
 		}
 		
 	}
+
 	
-	public function getLog() {
-		return $this->log;
+	public function outputLog() {
+
+		if(Config::get('app.debug')) {
+
+			return View::make('laravel4-utility::debugger.log');
+			
+		}
+		
 	}
 	
 }

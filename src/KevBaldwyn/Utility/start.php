@@ -4,7 +4,8 @@
  */
 App::error(function(ErrorException $exception, $code)
 {
-	KevBaldwyn\Utility\PHPErrorException::report($exception, $code);
+	//KevBaldwyn\Utility\PHPErrorException::report($exception, $code);
 });
 
+		
 ?>
