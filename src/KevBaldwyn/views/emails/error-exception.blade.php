@@ -1,1 +1,1 @@
-{{ $execption }}
+{{ $exception }}
