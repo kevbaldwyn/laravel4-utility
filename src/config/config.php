@@ -19,6 +19,6 @@ return array(
 			'error-exception' => 'An error was recorded'
 		),
 
-		'template' => 'debugger::emails.error-exception'
+		'template' => 'laravel4-utility::emails.error-exception'
 	)
 );
