@@ -1,7 +1,6 @@
 <?php
 namespace KevBaldwyn\Utility;
 
-use App;
 use Log;
 use Mail;
 use Config;

@@ -31,7 +31,7 @@ class UtilityServiceProvider extends ServiceProvider {
         $this->app->finish(function($request, $response) use ($app) {
         	// don't add the debug log if this is a json response
         	if(!str_contains($response->headers->__toString(), '/json')) {
-            	$app['utility.debugger']->outputLog();
+            	echo $app['utility.debugger']->outputRequestLog();
             }
         });
 		
@@ -55,7 +55,7 @@ class UtilityServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		// create the shared binding
+
 		$this->app->instance('utility.debugger', new Debugger());
 		
 		$this->app['command.kevbaldwyn.migrate-packages'] = $this->app->share(function($app) {

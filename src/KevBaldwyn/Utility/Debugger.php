@@ -50,7 +50,7 @@ class Debugger {
 	}
 
 	
-	public function outputLog() {
+	public function outputRequestLog() {
 
 		if(Config::get('app.debug')) {
 
