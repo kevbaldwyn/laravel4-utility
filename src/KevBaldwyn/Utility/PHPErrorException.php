@@ -15,11 +15,11 @@ class PHPErrorException {
 			// if not setup for debug mode then send an email
 			if(!Config::get('app.debug')) {
 				
-				Mail::send(Config::get('debugger::mail.template'), array('execption' => $execption->__toString()), function($message) {
+				Mail::send(Config::get('laravel4-utility::mail.template'), array('execption' => $execption->__toString()), function($message) {
 					$from = Config::get('mail.from');
 
 				    $message->from($from['address'], $from['name']);
-				    $message->to(Config::get('mail.to'))->subject(Config::get('debugger::mail.subject.error-exception'));
+				    $message->to(Config::get('laravel4-utility::mail.to'))->subject(Config::get('laravel4-utility::mail.subject.error-exception'));
 
 				});
 

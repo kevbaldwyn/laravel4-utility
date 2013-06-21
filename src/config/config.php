@@ -2,6 +2,8 @@
 
 return array(
 
+	'show-profile' => true,
+
 	'mail' => array(
 	
 		/**

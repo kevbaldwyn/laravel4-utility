@@ -54,7 +54,9 @@ class Debugger {
 
 		if(Config::get('app.debug')) {
 
-			return View::make('laravel4-utility::debugger.log');
+			if(Config::get('laravel4-utility::show-profile')) {
+				return View::make('laravel4-utility::debugger.log');
+			}
 			
 		}
 		

@@ -5,7 +5,6 @@ use Illuminate\Support\ServiceProvider;
 use KevBaldwyn\Utility\Debugger;
 use KevBaldwyn\Utility\PHPErrorException;
 use KevBaldwyn\Utility\PackageMigrationCommand;
-//use Symfony\Component\HttpKernel\Exception\ErrorException;
 
 class UtilityServiceProvider extends ServiceProvider {
 
@@ -56,6 +55,8 @@ class UtilityServiceProvider extends ServiceProvider {
 	public function register()
 	{
 
+		\Config::package('kevbaldwyn/laravel4-utility', __DIR__.'/../../../config');
+		
 		$this->app->instance('utility.debugger', new Debugger());
 		
 		$this->app['command.kevbaldwyn.migrate-packages'] = $this->app->share(function($app) {
@@ -73,7 +74,7 @@ class UtilityServiceProvider extends ServiceProvider {
 	 */
 	public function provides()
 	{
-		return array('utility.debugger');
+		return array('laravel4-utility.debugger');
 	}
 
 }
