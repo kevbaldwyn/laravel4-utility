@@ -16,8 +16,8 @@ class PHPErrorException {
 			// if not setup for debug mode then send an email
 			if(!Config::get('app.debug')) {
 
-				$profile = View::make('laravel4-utility::debugger.log');
-
+				$profile = Debugger::getRequestLog();
+				
 				Mail::send(Config::get('laravel4-utility::mail.template'), array('exception' => $exception->__toString(), 'profile' => $profile->__toString()), function($message) {
 
 					if(Config::get('laravel4-utility::mail.from') == 'default') {

@@ -55,11 +55,16 @@ class Debugger {
 		if(Config::get('app.debug')) {
 
 			if(Config::get('laravel4-utility::show-profile')) {
-				return View::make('laravel4-utility::debugger.log');
+				return static::getRequestLog();
 			}
 			
 		}
 		
+	}
+
+
+	public static function getRequestLog() {
+		return View::make('laravel4-utility::debugger.log');
 	}
 	
 }
