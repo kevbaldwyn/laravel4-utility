@@ -1,1 +1,3 @@
-{{ $exception }}
+<pre>{{ $exception }}</pre>
+
+{{ $profile }}

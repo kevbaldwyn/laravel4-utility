@@ -34,16 +34,16 @@ class UtilityServiceProvider extends ServiceProvider {
             }
         });
 		
+		\App::error(function($exception) {
+			\KevBaldwyn\Utility\PHPErrorException::report($exception);
+		});
+		
 
 		// pass off any log events to a debug service so we can choose if we want to output them to the browser as well
 		\Log::listen(function($level, $message, $context) use ($app) {
 		    $app['utility.debugger']->dump($level, $message, $context);
 		});
 
-		
-		$app['whoops']->pushHandler(function($exception, $inspector, $run) {
-			\KevBaldwyn\Utility\PHPErrorException::report($exception);
-		});
 
 	}
 
