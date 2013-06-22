@@ -17,24 +17,37 @@ class PHPErrorException {
 			if(!Config::get('app.debug')) {
 
 				$profile = Debugger::getRequestLog();
+
+				try {
+					Mail::send(Config::get('laravel4-utility::mail.template'), array('exception' => $exception->__toString(), 'profile' => $profile->__toString()), function($message) {
+
+						if(Config::get('laravel4-utility::mail.from') == 'default') {
+							$from = Config::get('mail.from');
+						}else{
+							$from = Config::get('laravel4-utility::mail.from');
+						}
+
+					    $message->from($from['address'], $from['name']);
+					    $message->to(Config::get('laravel4-utility::mail.to'))->subject($_SERVER['HTTP_HOST'] . ': ' . Config::get('laravel4-utility::mail.subject.error-exception'));
+
+					});
 				
-				Mail::send(Config::get('laravel4-utility::mail.template'), array('exception' => $exception->__toString(), 'profile' => $profile->__toString()), function($message) {
-
-					if(Config::get('laravel4-utility::mail.from') == 'default') {
-						$from = Config::get('mail.from');
-					}else{
-						$from = Config::get('laravel4-utility::mail.from');
-					}
-
-				    $message->from($from['address'], $from['name']);
-				    $message->to(Config::get('laravel4-utility::mail.to'))->subject($_SERVER['HTTP_HOST'] . ': ' . Config::get('laravel4-utility::mail.subject.error-exception'));
-
-				});
+				}catch(\Exception $e) {
+					// silent fail if mail can't be sent - there's no way of notifying anyone anyway
+					// could possible return this exception and then output it to the view as an additional message?
+				}
 
 			}
 
 		}
 		
+	}
+
+
+	public static function view() {
+		if(!Config::get('app.debug')) {
+			return View::make(Config::get('laravel4-utility::template.public-error'));
+		}
 	}
 
 	

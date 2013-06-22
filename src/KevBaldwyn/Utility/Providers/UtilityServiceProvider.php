@@ -36,6 +36,7 @@ class UtilityServiceProvider extends ServiceProvider {
 		
 		\App::error(function($exception) {
 			\KevBaldwyn\Utility\PHPErrorException::report($exception);
+			return \KevBaldwyn\Utility\PHPErrorException::view();
 		});
 		
 

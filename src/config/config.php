@@ -20,5 +20,9 @@ return array(
 		),
 
 		'template' => 'laravel4-utility::emails.error-exception'
+	),
+
+	'template' => array(
+		'public-error' => 'laravel4-utility::public-error'
 	)
 );
