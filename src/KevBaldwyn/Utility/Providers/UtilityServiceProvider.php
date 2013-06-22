@@ -35,8 +35,16 @@ class UtilityServiceProvider extends ServiceProvider {
         });
 		
 		\App::error(function($exception) {
-			\KevBaldwyn\Utility\PHPErrorException::report($exception);
-			return \KevBaldwyn\Utility\PHPErrorException::view();
+			
+			$reportResult = \KevBaldwyn\Utility\PHPErrorException::report($exception);
+			
+			$data = array();
+			if($reportResult instanceof \Exception) {
+				$data['additional_errors'][] = 'Could not report error: ' . $reportResult->getMessage();
+			}
+
+			return \KevBaldwyn\Utility\PHPErrorException::view($data);
+
 		});
 		
 

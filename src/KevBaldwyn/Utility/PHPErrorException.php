@@ -35,6 +35,7 @@ class PHPErrorException {
 				}catch(\Exception $e) {
 					// silent fail if mail can't be sent - there's no way of notifying anyone anyway
 					// could possible return this exception and then output it to the view as an additional message?
+					return $e;
 				}
 
 			}
@@ -44,9 +45,9 @@ class PHPErrorException {
 	}
 
 
-	public static function view() {
+	public static function view($data = array()) {
 		if(!Config::get('app.debug')) {
-			return View::make(Config::get('laravel4-utility::template.public-error'));
+			return View::make(Config::get('laravel4-utility::template.public-error'), $data);
 		}
 	}
 
